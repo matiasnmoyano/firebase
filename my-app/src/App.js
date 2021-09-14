@@ -1,7 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
-
+import {db} from './firebaseconf'
 function App() {
+  const usuario = {
+    nombre:'Mati',
+    edad:23,
+  }
+  const setUsuario = async (e) =>{
+    db.collection("users").add(usuario)
+  .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+  })
+  .catch((error) => {
+      console.error("Error adding document: ", error);
+  });
+  
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +31,7 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={(e) =>{setUsuario(e)}}>ENVIAR</button>
       </header>
     </div>
   );
